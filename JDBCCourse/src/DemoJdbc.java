@@ -27,6 +27,37 @@ public class DemoJdbc {
         String name = result.getString("name");
         System.out.println(name);
 
+        //fetching all the records
+        sql = "select * from students";
+
+        ResultSet fetchAllRecords = st.executeQuery(sql);
+        while(fetchAllRecords.next()){
+            System.out.print(fetchAllRecords.getInt("id") + " - ");
+            System.out.println(fetchAllRecords.getString("name"));
+        }
+
+        //CRUD operations
+        sql = "insert into students values (105, 'test4')";
+        boolean insertRecord = st.execute(sql);
+        System.out.println(insertRecord);//this doesnt give us the status so returning is of no use, if u need to understand more about this look into the function definition
+        //so we can just execute the sql
+
+        //prepared statement
+        /*
+            1. if we have to get the data from a source and execute the query it is difficult to format the query
+            2. to stop sql injections (not sure about this have to do some research)
+            3. improve performance
+         */
+        int studentId = 106;
+        String studentName = "test5";
+        sql = "insert into students values (?, ?)";
+        PreparedStatement pst = con.prepareStatement(sql);
+        //we cannot execute the query at this point
+        pst.setInt(1, studentId);//column number and the value
+        pst.setString(2, studentName);
+        pst.execute();
+
+
         //closing the connection
         con.close();
 
