@@ -3,7 +3,24 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id = "alien" class = "org.example.Alien">
+
+<!--    this is for prototype type of scope-->
+<!--    <bean id = "alien" class = "org.example.Alien" scope = "prototype">-->
+
+<!--    </bean>-->
+
+    <bean id = "alien" class = "org.example.Alien" scope = "prototype">
+        <property name="age1" value = "33"></property>
+        <property name="lap" ref = "laptop"></property>
+        <property name="com" ref = "laptop"></property>
+    </bean>
+
+    <bean id = "laptop" class = "org.example.Laptop">
 
     </bean>
+
+    <bean id = "desktop" class = "org.example.Desktop" lazy-init="true">
+
+    </bean>
+
 </beans>
